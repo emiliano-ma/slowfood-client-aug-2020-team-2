@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { getProducts } from "../modules/menu";
-import { createOrder } from "../modules/order";
+import { createOrder, updateOrder } from "../modules/order";
 
 class MenuList extends Component {
   state = {
     menuList: [],
-    orderResponse: {}
+    orderResponse: {},
   };
 
   componentDidMount() {
@@ -18,10 +18,17 @@ class MenuList extends Component {
   }
   addToOrder = async (e) => {
     let productId = e.target.parentElement.dataset.id;
-    let result = await createOrder(productId);
+    let result;
+
+    if (this.state.orderId) {
+      result = await updateOrder(productId, this.state.orderId);
+    } else {
+      result = await createOrder(productId);
+    }
 
     this.setState({
       orderResponse: { id: productId, message: result.message },
+      orderId: result.order_id,
     });
   };
 
