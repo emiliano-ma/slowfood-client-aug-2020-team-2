@@ -64,7 +64,7 @@ describe("Logged in user can update order with multiple products", () => {
     cy.route({
       method: "PUT",
       url: "http://localhost:3000/api/v1/orders/5",
-      response: "fixture:successfull_order_second_update.json",
+      response: "fixture:order_update_second_successfull.json",
       headers: {
         uid: "user@mail.com",
       }

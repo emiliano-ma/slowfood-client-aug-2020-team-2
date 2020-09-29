@@ -22,7 +22,7 @@ class MenuList extends Component {
     let productId = e.target.parentElement.dataset.id;
     let result;
 
-    if (this.state.currentOrder.id) {debugger
+    if (this.state.currentOrder.id) { 
       result = await updateOrder(productId, this.state.currentOrder.id);
     } else {
       result = await createOrder(productId);
@@ -37,16 +37,16 @@ class MenuList extends Component {
   render() {
     let menu;
     let authenticated = this.props.authenticated;
-    const order = this.state.currentOrder
+    const order = this.state.currentOrder;
 
     let viewOrder;
     let showOrder;
 
-    if (this.state.currentOrder) {
+    if (this.state.currentOrder.id) {
       viewOrder = <button onClick={() => this.setState({showOrder: true})}>View Order</button>
     }
 
-    if (this.setState.showOrder) {
+    if (this.state.showOrder) {
       showOrder = (
         <div data-cy="order-details">
           <p data-cy="order-total">Total: {order.total}</p>
