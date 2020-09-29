@@ -6,6 +6,8 @@ class MenuList extends Component {
   state = {
     menuList: [],
     orderResponse: {},
+    currentOrder: {},
+    showOrder: false
   };
 
   componentDidMount() {
@@ -20,21 +22,44 @@ class MenuList extends Component {
     let productId = e.target.parentElement.dataset.id;
     let result;
 
-    if (this.state.orderId) {
-      result = await updateOrder(productId, this.state.orderId);
+    if (this.state.currentOrder.id) {debugger
+      result = await updateOrder(productId, this.state.currentOrder.id);
     } else {
       result = await createOrder(productId);
     }
 
     this.setState({
       orderResponse: { id: productId, message: result.message },
-      orderId: result.order_id,
+      currentOrder: result.order
     });
   };
 
   render() {
     let menu;
     let authenticated = this.props.authenticated;
+    const order = this.state.currentOrder
+
+    let viewOrder;
+    let showOrder;
+
+    if (this.state.currentOrder) {
+      viewOrder = <button onClick={() => this.setState({showOrder: true})}>View Order</button>
+    }
+
+    if (this.setState.showOrder) {
+      showOrder = (
+        <div data-cy="order-details">
+          <p data-cy="order-total">Total: {order.total}</p>
+          <ui>
+          {order.products.map(product => {
+            return <li>{product.amount}x {product.name}</li>
+          })}
+          </ui>
+        </div>
+      )
+
+    }
+
     if (this.state.menuList.length > 0) {
       menu = this.state.menuList.map((product) => {
         return (
@@ -54,6 +79,8 @@ class MenuList extends Component {
 
     return (
       <>
+        {viewOrder}
+        {showOrder}
         <div>{menu}</div>
       </>
     );
