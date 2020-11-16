@@ -3,17 +3,11 @@
 
 
 
-The objective was to create an online platform for a restaurant to accept online orders and save them to [API backend](https://slowfood-api-aug-2020-team-2.herokuapp.com/)
+Online platform for a restaurant to provide a menu and accept online orders.
 
+[API that supports this client](https://slowfood-api-aug-2020-team-2.herokuapp.com/)
 
-Features
-* User registration/login
-* Adding items to order
-* Preview order 
-* Save the order to backend
-* Show confirmation message
-
-
+The project runs over the week five of the bootcamp and its objective is to use the CRUD HTTP verbs.
 
 ## Authors:
 
